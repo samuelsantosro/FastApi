@@ -1,5 +1,6 @@
 #venv\Scripts\activate
-
+#alembic revision --autogenerate -m "Geracao Inicial"
+#alembic upgrade head
 #pip install fastapi uvicorn sqlalchemy passlib[bcrypt] python-jose[cryptography] python-dotenv python-multipart
 
 #uvicorn main:app --reload
