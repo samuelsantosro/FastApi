@@ -1,7 +1,5 @@
 from fastapi import APIRouter
-
-pedidos_roteador = APIRouter(prefix="/pedidos", tags=["pedidos"])
-lista = [
+jason_fake = [
   {
     "id": 1,
     "nome": "Samuel 1",
@@ -52,14 +50,19 @@ lista = [
   }
 ]
 
+pedidos_roteador = APIRouter(prefix="/pedidos", tags=["pedidos"])
 
 @pedidos_roteador.get("/")
 async def pedidos():
-    return lista
+    return {"mensagem": "Acessou rota de pedidos"}
+
+@pedidos_roteador.get("/listar")
+async def pedidos():
+    return jason_fake
 
 @pedidos_roteador.get("/pedido")
 async def pedido(id: int):
-    for i in lista:
+    for i in jason_fake:
         if i["id"]==id:
             return i
     return {'msg': 'não encontrado'}
