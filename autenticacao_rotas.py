@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from modelos import Usuario, db
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import select
 
 autenticacao_roteador = APIRouter(prefix="/autenticacao", tags=["autenticacao"])
 
@@ -20,3 +21,10 @@ async def criar_conta(email: str, senha: str, nome: str):
         session.add(novo_usuario)
         session.commit()
         return {"mensagem":"Usuário cadastrado com sucesso"}
+
+@autenticacao_roteador.get("/listar_usu")
+async def listar_usu():
+    Session = sessionmaker(bind=db)
+    session = Session()
+    usuarios = session.query(Usuario).all()
+    return usuarios
